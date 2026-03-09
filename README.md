@@ -1,14 +1,24 @@
-# EngageLab SMS Skill
+# EngageLab Skills
+
+This project maintains various EngageLab skills.
+
+## EngageLab SMS Skill
 
 An agent skill that enables AI assistants to interact with the [EngageLab SMS REST API](https://www.engagelab.com). It provides structured instructions for sending SMS messages and managing templates and sender ID signatures through EngageLab's platform.
 
-## What It Does
+### What It Does
 
 - **Send SMS** — Compose and send notification or marketing SMS to one or more recipients using pre-approved templates
 - **Manage Templates** — Create, list, update, and delete SMS templates (with variable placeholders and review workflow)
 - **Manage Signatures (Sender IDs)** — Create, list, update, and delete sender ID signatures attached to templates
 
-## Skill Structure
+### Installation
+
+```shell
+npx skills add https://github.com/Metaverse-Cloud/EngageLab-Skills/tree/main/engagelab-sms
+```
+
+### Skill Structure
 
 ```
 engagelab-sms/
@@ -24,7 +34,7 @@ engagelab-sms/
 | `references/template-and-signature-api.md` | Full request/response field specs for all template and signature endpoints |
 | `references/error-codes.md` | Complete error code tables for SMS sending and template/signature operations |
 
-## API Coverage
+### API Coverage
 
 | Operation | Method | Endpoint |
 |-----------|--------|----------|
@@ -40,7 +50,7 @@ engagelab-sms/
 | Update signature | `PUT` | `/v1/sign-configs/:signId` |
 | Delete signature | `DELETE` | `/v1/sign-configs/:signId` |
 
-## Prerequisites
+### Prerequisites
 
 Before using this skill, complete these steps in the [EngageLab console](https://www.engagelab.com):
 
@@ -48,7 +58,7 @@ Before using this skill, complete these steps in the [EngageLab console](https:/
 2. **Set up SMS templates** — Go to Message Center > Template Management to create and submit templates for review
 3. **Configure sender IDs** (optional) — Create signature configurations to identify the sender
 
-## Authentication
+### Authentication
 
 All API calls use HTTP Basic Authentication:
 
