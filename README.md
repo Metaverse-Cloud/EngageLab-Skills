@@ -5,7 +5,9 @@ This project maintains various EngageLab skills.
 - [x] Email
 - [x] SMS
 - [x] OTP
-- [ ] WhatsApp
+- [x] WhatsApp Business API
+- [ ] Silent Auth
+- [ ] CAPTCHA
 
 ## Email
 
@@ -210,3 +212,70 @@ Authorization: Basic base64(dev_key:dev_secret)
 ```
 
 The API base URL is `https://otp.api.engagelab.cc`.
+
+## WhatsApp Business API
+
+An agent skill that enables AI assistants to interact with the [EngageLab WhatsApp Business REST API](https://www.engagelab.com/whatsapp-business-api). As a Meta-authorized WhatsApp Business solution provider, EngageLab connects businesses with over 2 billion WhatsApp users for marketing, notifications, OTP verification, and customer service.
+
+### What It Does
+
+- **Send Messages** — Deliver template, text, image, video, audio, document, and sticker messages via WhatsApp
+- **Manage Templates** — Create, list, get, update, and delete WABA message templates with header/body/footer/button components
+- **Handle Callbacks** — Receive message delivery status, user responses (replies, orders), and system notifications (balance, template updates, WABA events)
+
+### Installation
+
+```shell
+npx skills add https://github.com/Metaverse-Cloud/EngageLab-Skills/tree/main/engagelab-whatsapp-business
+```
+
+### Skill Structure
+
+```
+engagelab-whatsapp-business/
+├── SKILL.md                                   # Main skill file
+├── scripts/
+│   └── whatsapp_client.py                     # Python client for all WhatsApp API endpoints
+└── references/
+    ├── error-codes.md                         # Error code reference
+    ├── template-api.md                        # Template CRUD API specs with components object
+    └── callback-api.md                        # Callback webhook events and data structures
+```
+
+| File | Purpose |
+|------|---------|
+| `SKILL.md` | Entry point — authentication, endpoint overview, all message types with examples, template management summary, callback events, code generation guidance |
+| `scripts/whatsapp_client.py` | Python client class (`EngageLabWhatsApp`) wrapping all endpoints: 7 message types + template CRUD with filtering |
+| `references/error-codes.md` | Complete error code tables for messaging and template APIs |
+| `references/template-api.md` | Full template CRUD specs with components object details (header, body, footer, buttons) and language codes |
+| `references/callback-api.md` | Webhook callback events: message status lifecycle, user responses, and system notifications |
+
+### API Coverage
+
+| Operation | Method | Endpoint |
+|-----------|--------|----------|
+| Send message | `POST` | `/v1/messages` |
+| List templates | `GET` | `/v1/templates` |
+| Get template | `GET` | `/v1/templates/:templateId` |
+| Create template | `POST` | `/v1/templates` |
+| Update template | `PUT` | `/v1/templates/:templateId` |
+| Delete template | `DELETE` | `/v1/templates/:templateName` |
+
+### Prerequisites
+
+Before using this skill, complete these steps in the [EngageLab console](https://www.engagelab.com):
+
+1. **Create API credentials** — Go to Configuration Management > API Keys to generate a `dev_key` (DevKey) and `dev_secret` (DevSecret)
+2. **Apply for WhatsApp Business API** — Complete the onboarding process with EngageLab and Meta
+3. **Configure a sending number** — Set up your WhatsApp Business phone number in the console
+4. **Create message templates** — Submit templates for Meta review before sending proactive messages
+
+### Authentication
+
+All API calls use HTTP Basic Authentication:
+
+```
+Authorization: Basic base64(dev_key:dev_secret)
+```
+
+The API base URL is `https://wa.api.engagelab.cc`.
