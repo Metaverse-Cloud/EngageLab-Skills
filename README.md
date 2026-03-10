@@ -140,7 +140,7 @@ Authorization: Basic base64(dev_key:dev_secret)
 
 ## OTP
 
-An agent skill that enables AI assistants to interact with the [EngageLab OTP REST API](https://www.engagelab.com/docs/OTP/Product-Overview). It handles one-time password generation, multi-channel delivery (SMS, WhatsApp, Email, Voice), verification, custom messaging, template management, callback webhooks, and SMPP integration.
+An agent skill that enables AI assistants to interact with the [EngageLab OTP REST API](https://www.engagelab.com/otp). It handles one-time password generation, multi-channel delivery (SMS, WhatsApp, Email, Voice), verification, custom messaging, template management, callback webhooks, and SMPP integration.
 
 ### What It Does
 
