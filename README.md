@@ -1,5 +1,7 @@
 # EngageLab Skills
 
+> ⚠️ Note: This repo have been archived and moved to [DevEngageLab/engagelab-skills](https://github.com/DevEngageLab/engagelab-skills).
+
 This project maintains various EngageLab skills.
 
 - [x] Email
