@@ -8,6 +8,8 @@ This project maintains various EngageLab skills.
 - [x] SMS
 - [x] OTP
 - [x] WhatsApp Business API
+- [x] App Push
+- [x] Web Push
 - [ ] Silent Auth
 - [ ] CAPTCHA
 
@@ -281,3 +283,179 @@ Authorization: Basic base64(dev_key:dev_secret)
 ```
 
 The API base URL is `https://wa.api.engagelab.cc`.
+
+## App Push
+
+An agent skill that enables AI assistants to interact with the [EngageLab App Push REST API](https://www.engagelab.com/push) (MTPush). It supports push notifications and in-app messages to Android, iOS, and HarmonyOS devices, with multi-vendor channel support (FCM, Huawei, Xiaomi, OPPO, vivo, Meizu, Honor, etc.).
+
+### What It Does
+
+- **Create Push** — Send notification or message to single/multiple devices via broadcast, tag, alias, registration_id, or segment targeting
+- **Batch Single Push** — Batch push by registration_id or alias (up to 500 per request)
+- **Group Push** — Push to all apps in a group with a single request
+- **Push Plan** — Create, update, and list push plans; query message IDs by plan
+- **Scheduled Tasks** — Create, get, update, and delete scheduled push tasks (single, periodical, intelligent triggers)
+- **Tag & Alias** — Query, set, and delete device tags and aliases; query tag counts
+- **Message Recall** — Recall a pushed message within one day
+- **Delete User** — Delete a user (registration_id) and all associated data
+- **Statistics** — Query message lifecycle stats (targets, sent, delivered, impressions, clicks)
+- **Callback** — Webhook setup and HMAC-SHA256 signature verification
+- **Test Push** — Validate push requests without actually sending
+- **Image API** — Upload big/small pictures for OPPO push
+- **Push-to-Speech** — Create, update, list, and delete voice broadcast files
+
+### Installation
+
+```shell
+npx skills add https://github.com/Metaverse-Cloud/EngageLab-Skills/tree/main/engagelab-apppush
+```
+
+### Skill Structure
+
+```
+engagelab-apppush/
+├── SKILL.md                                   # Main skill file
+├── scripts/
+│   └── push_client.py                         # Python client for all App Push API endpoints
+└── references/
+    ├── error-codes.md                         # Error code reference
+    ├── http-status-code.md                    # HTTP status code specification
+    └── callback-api.md                        # Callback webhook setup and security
+```
+
+| File | Purpose |
+|------|---------|
+| `SKILL.md` | Entry point — authentication, endpoint overview, create push, batch push, group push, push plan, scheduled tasks, tag & alias, message recall, delete user, statistics, callback, test push, image API, push-to-speech, code generation guidance |
+| `scripts/push_client.py` | Python client class (`EngageLabPush`) wrapping create push, batch push (regid/alias), device get/set/delete, tag count, message recall, validate push, push plan CRUD, scheduled tasks CRUD, and message detail stats |
+| `references/error-codes.md` | Complete error code tables for Push API operations |
+| `references/http-status-code.md` | HTTP status code specification |
+| `references/callback-api.md` | Callback address setup, validation flow, and HMAC-SHA256 security (X-CALLBACK-ID) |
+
+### API Coverage
+
+| Operation | Method | Endpoint |
+|-----------|--------|----------|
+| Create push | `POST` | `/v4/push` |
+| Batch push by registration_id | `POST` | `/v4/batch/push/regid` |
+| Batch push by alias | `POST` | `/v4/batch/push/alias` |
+| Group push | `POST` | `/v4/grouppush` |
+| Create/update push plan | `POST` | `/v4/push_plan` |
+| List push plans | `GET` | `/v4/push_plan/list` |
+| Msg IDs by plan | `GET` | `/v4/status/plan/msg/` |
+| Create scheduled task | `POST` | `/v4/schedules` |
+| Get scheduled task | `GET` | `/v4/schedules/{schedule_id}` |
+| Update scheduled task | `PUT` | `/v4/schedules/{schedule_id}` |
+| Delete scheduled task | `DELETE` | `/v4/schedules/{schedule_id}` |
+| Tag count | `GET` | `/v4/tags_count` |
+| Get device (tags/alias) | `GET` | `/v4/devices/{registration_id}` |
+| Set device tags/alias | `POST` | `/v4/devices/{registration_id}` |
+| Delete device (user) | `DELETE` | `/v4/devices/{registration_id}` |
+| Message recall | `DELETE` | `/v4/push/withdraw/{msg_id}` |
+| Message statistics | `GET` | `/v4/status/detail` |
+| Test push (validate) | `POST` | `/v4/push/validate` |
+| OPPO image upload | `POST` | `/v4/image/oppo` |
+| Create/update voice | `POST` | `/v4/voices` |
+| List/delete voices | `GET` / `DELETE` | `/v4/voices` |
+
+### Prerequisites
+
+Before using this skill, complete these steps in the [EngageLab console](https://www.engagelab.com):
+
+1. **Create an application** — Go to Console → Application Settings → Application Info to obtain the **AppKey** and **Master Secret**
+2. **Integrate the SDK** — Integrate the EngageLab Push SDK into your Android, iOS, or HarmonyOS app
+3. **Set up push templates** (optional) — Create notification templates for consistent messaging
+4. **Configure callback URL** (optional) — Contact EngageLab support to set up webhook endpoints for delivery status events
+
+### Authentication
+
+All API calls use HTTP Basic Authentication:
+
+```
+Authorization: Basic base64(appKey:masterSecret)
+```
+
+Base URLs by data center:
+- Singapore: `https://pushapi-sgp.engagelab.com`
+- Virginia, USA: `https://pushapi-usva.engagelab.com`
+- Frankfurt: `https://pushapi-defra.engagelab.com`
+- Hong Kong: `https://pushapi-hk.engagelab.com`
+
+## Web Push
+
+An agent skill that enables AI assistants to interact with the [EngageLab Web Push REST API](https://www.engagelab.com/web-push) (MTPush Web). It supports push notifications and in-app messages to web browsers including Chrome, Firefox, Safari, Edge, and Opera.
+
+### What It Does
+
+- **Create Push** — Send notification or message to web devices via broadcast, tag, alias, or registration_id targeting
+- **Batch Single Push** — Batch push by registration_id or alias (up to 500 per request)
+- **Group Push** — Push to all apps in a group with a single request
+- **Scheduled Tasks** — Create, get, update, and delete scheduled web push tasks (single, periodical, intelligent triggers)
+- **Tag & Alias** — Query, set, and delete device tags and aliases; query tag counts
+- **Delete User** — Delete a user (registration_id) and all associated data
+- **Statistics** — Query message lifecycle stats with per-channel breakdowns (EngageLab Web, Chrome, Safari, Firefox, Edge, Opera)
+- **Callback** — Webhook setup and HMAC-SHA256 signature verification
+
+### Installation
+
+```shell
+npx skills add https://github.com/Metaverse-Cloud/EngageLab-Skills/tree/main/engagelab-webpush
+```
+
+### Skill Structure
+
+```
+engagelab-webpush/
+├── SKILL.md                                   # Main skill file
+├── scripts/
+│   └── webpush_client.py                      # Python client for all Web Push API endpoints
+└── references/
+    ├── error-codes.md                         # Error code reference
+    ├── http-status-code.md                    # HTTP status code specification
+    └── callback-api.md                        # Callback webhook setup and security
+```
+
+| File | Purpose |
+|------|---------|
+| `SKILL.md` | Entry point — authentication, endpoint overview, create push, batch push, group push, scheduled tasks, tag & alias, delete user, statistics, callback, code generation guidance |
+| `scripts/webpush_client.py` | Python client class (`EngageLabWebPush`) wrapping create push, batch push (regid/alias), device get/set/delete, tag count, scheduled tasks CRUD, and message detail stats |
+| `references/error-codes.md` | Complete error code tables for Web Push API operations |
+| `references/http-status-code.md` | HTTP status code specification |
+| `references/callback-api.md` | Callback address setup, validation flow, and HMAC-SHA256 security (X-CALLBACK-ID) |
+
+### API Coverage
+
+| Operation | Method | Endpoint |
+|-----------|--------|----------|
+| Create push | `POST` | `/v4/push` |
+| Batch push by registration_id | `POST` | `/v4/batch/push/regid` |
+| Batch push by alias | `POST` | `/v4/batch/push/alias` |
+| Group push | `POST` | `/v4/grouppush` |
+| Create scheduled task | `POST` | `/v4/schedules` |
+| Get scheduled task | `GET` | `/v4/schedules/{schedule_id}` |
+| Update scheduled task | `PUT` | `/v4/schedules/{schedule_id}` |
+| Delete scheduled task | `DELETE` | `/v4/schedules/{schedule_id}` |
+| Tag count | `GET` | `/v4/tags_count` |
+| Get device (tags/alias) | `GET` | `/v4/devices/{registration_id}` |
+| Set device tags/alias | `POST` | `/v4/devices/{registration_id}` |
+| Delete device (user) | `DELETE` | `/v4/devices/{registration_id}` |
+| Message statistics | `GET` | `/v4/messages/details` |
+
+### Prerequisites
+
+Before using this skill, complete these steps in the [EngageLab console](https://www.engagelab.com):
+
+1. **Create an application** — Go to Console → Application Settings → Application Info to obtain the **AppKey** and **Master Secret**
+2. **Integrate the Web Push SDK** — Add the EngageLab Web Push SDK to your website
+3. **Configure callback URL** (optional) — Contact EngageLab support to set up webhook endpoints for delivery status events
+
+### Authentication
+
+All API calls use HTTP Basic Authentication:
+
+```
+Authorization: Basic base64(appKey:masterSecret)
+```
+
+Base URLs by data center:
+- Singapore: `https://webpushapi-sgp.engagelab.com`
+- Hong Kong: `https://webpushapi-hk.engagelab.com`
