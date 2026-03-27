@@ -10,7 +10,7 @@ Usage:
     client = EngageLabOTP("YOUR_DEV_KEY", "YOUR_DEV_SECRET")
 
     # Send platform-generated OTP
-    result = client.send_otp("+8618701235678", "my-template")
+    result = client.send_otp("+6591234567", "my-template")
 
     # Verify
     verification = client.verify(result["message_id"], "123456")
@@ -175,18 +175,18 @@ if __name__ == "__main__":
     client = EngageLabOTP(DEV_KEY, DEV_SECRET)
 
     # -- Send OTP and verify --
-    # result = client.send_otp("+8618701235678", "my-template")
+    # result = client.send_otp("+6591234567", "my-template")
     # print(f"Sent! message_id={result['message_id']}, channel={result['send_channel']}")
     # verification = client.verify(result["message_id"], "123456")
     # print(f"Verified: {verification['verified']}")
 
     # -- Send custom OTP (your own code) --
-    # result = client.send_custom_otp("+8618701235678", "398210", "my-template")
+    # result = client.send_custom_otp("+6591234567", "398210", "my-template")
     # print(f"Custom OTP sent! message_id={result['message_id']}")
 
     # -- Send custom message (notification) --
     # result = client.send_custom_message(
-    #     ["+8618701235678"],
+    #     ["+6591234567"],
     #     "notification-template",
     #     params={"order": "ORD-9876"},
     # )

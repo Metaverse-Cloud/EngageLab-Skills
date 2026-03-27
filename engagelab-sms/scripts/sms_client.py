@@ -11,7 +11,7 @@ Usage:
     client = EngageLabSMS("YOUR_DEV_KEY", "YOUR_DEV_SECRET")
 
     # Send SMS
-    result = client.send_sms(["+8618701235678"], "my-template", params={"code": "1234"})
+    result = client.send_sms(["+6591234567"], "my-template", params={"code": "1234"})
 
     # Manage templates
     templates = client.list_templates()
@@ -83,7 +83,7 @@ class EngageLabSMS:
         Send SMS to one or more recipients.
 
         Args:
-            to: List of phone numbers with country code (e.g. ["+8618701235678"]).
+            to: List of phone numbers with country code (e.g. ["+6591234567"]).
             template_id: ID of an approved SMS template.
             params: Template variable values (e.g. {"name": "Bob", "code": "1234"}).
             plan_name: Optional plan name, defaults to "-".
@@ -247,7 +247,7 @@ if __name__ == "__main__":
 
     # -- Send SMS --
     # result = client.send_sms(
-    #     ["+8618701235678"],
+    #     ["+6591234567"],
     #     "my-template-id",
     #     params={"code": "039487"},
     # )
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     # -- Scheduled SMS --
     # import time
     # result = client.send_sms(
-    #     ["+8618701235678"],
+    #     ["+6591234567"],
     #     "my-template-id",
     #     params={"code": "039487"},
     #     schedule_time=int(time.time()) + 3600,  # 1 hour from now

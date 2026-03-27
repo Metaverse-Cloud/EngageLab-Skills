@@ -76,7 +76,7 @@ If the user hasn't provided credentials, ask them for their `dev_key` and `dev_s
 
 ```json
 {
-  "to": ["+8618701235678"],
+  "to": ["+6591234567"],
   "template": {
     "id": "TEMPLATE_ID",
     "params": {

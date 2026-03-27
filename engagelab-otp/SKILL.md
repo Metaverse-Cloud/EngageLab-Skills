@@ -86,7 +86,7 @@ Use this when you want **EngageLab to generate** the verification code and deliv
 
 ```json
 {
-  "to": "+8618701235678",
+  "to": "+6591234567",
   "template": {
     "id": "test-template-1",
     "language": "default",
@@ -101,7 +101,7 @@ Use this when you want **EngageLab to generate** the verification code and deliv
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `to` | `string` | Yes | Phone number (with country code, e.g., `+8613800138000`) or email address |
+| `to` | `string` | Yes | Phone number (with country code, e.g., `+6581234567`) or email address |
 | `template.id` | `string` | Yes | Template ID |
 | `template.language` | `string` | No | Language: `default`, `zh_CN`, `zh_HK`, `en`, `ja`, `th`, `es`. Defaults to `default` |
 | `template.params` | `object` | No | Custom template variable values as key-value pairs |
@@ -142,7 +142,7 @@ Use this when you want to **generate the verification code yourself** and have E
 
 ```json
 {
-  "to": "+8618701235678",
+  "to": "+6591234567",
   "code": "398210",
   "template": {
     "id": "test-template-1",
@@ -220,7 +220,7 @@ Send custom template content (verification codes, notifications, or marketing me
 
 ```json
 {
-  "to": "+8618701235678",
+  "to": "+6591234567",
   "template": {
     "id": "test-template-1",
     "params": {
@@ -255,7 +255,7 @@ Same format as OTP Send — returns `message_id` and `send_channel`.
 **Verification code**:
 ```json
 {
-  "to": "+8618701235678",
+  "to": "+6591234567",
   "template": { "id": "code-template", "params": { "code": "123456" } }
 }
 ```
@@ -263,7 +263,7 @@ Same format as OTP Send — returns `message_id` and `send_channel`.
 **Notification**:
 ```json
 {
-  "to": ["+8618701235678"],
+  "to": ["+6591234567"],
   "template": { "id": "notification-template", "params": { "order": "123456" } }
 }
 ```
@@ -271,7 +271,7 @@ Same format as OTP Send — returns `message_id` and `send_channel`.
 **Marketing**:
 ```json
 {
-  "to": ["+8618701235678"],
+  "to": ["+6591234567"],
   "template": { "id": "marketing-template", "params": { "name": "EngageLab", "promotion": "30%" } }
 }
 ```
@@ -378,7 +378,7 @@ headers = {
 
 # Step 1: Send OTP
 send_resp = requests.post(f"{BASE_URL}/v1/messages", headers=headers, json={
-    "to": "+8618701235678",
+    "to": "+6591234567",
     "template": {"id": "my-template", "language": "default"}
 })
 result = send_resp.json()

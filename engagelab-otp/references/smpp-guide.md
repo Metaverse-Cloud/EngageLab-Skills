@@ -47,7 +47,7 @@ Uses the `SUBMIT_SM` command (`0x00000004`).
 |-------|--------|-------------|
 | `service_type` | `MSG` / `CODE` / `MRKT` | Message type. Default: `MSG` |
 | `source_addr` | (blank) | Not used in OTP currently |
-| `destination_addr` | e.g., `+8613800138000` | International phone number format |
+| `destination_addr` | e.g., `+6581234567` | International phone number format |
 | `data_coding` | `UCS2` recommended | Use UCS2 to properly parse `{}` characters |
 | `header status` | `0x00000000` | Fixed value |
 
